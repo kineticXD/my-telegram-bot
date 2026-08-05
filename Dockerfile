@@ -10,6 +10,7 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
+# Change EXPOSE and CMD to port 8080
 EXPOSE 8080
 
-CMD gunicorn app:app & python3 bot.py
+CMD gunicorn --bind 0.0.0.0:8080 app:app & python3 bot.py
