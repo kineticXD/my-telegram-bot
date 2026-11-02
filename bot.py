@@ -13,20 +13,10 @@ import dns.resolver
 dns.resolver.default_resolver = dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers = ['8.8.8.8', '1.1.1.1']
 
-import os
-from threading import Thread
 from pyrogram import Client
 from config import API_ID, API_HASH, BOT_TOKEN, STRING_SESSION, LOGIN_SYSTEM
-from app import app
 
-def run_flask():
-    port = int(os.environ.get("PORT", 8080))
-    app.run(host='0.0.0.0', port=port)
-
-# Start Flask server thread for web keep-alive
-t = Thread(target=run_flask)
-t.daemon = True
-t.start()
+# Flask and threading imports have been removed here
 
 if STRING_SESSION is not None and LOGIN_SYSTEM == False:
     TechVJUser = Client("TechVJ", api_id=API_ID, api_hash=API_HASH, session_string=STRING_SESSION)
@@ -56,5 +46,3 @@ class Bot(Client):
 
 if __name__ == "__main__":
     Bot().run()
-
-
